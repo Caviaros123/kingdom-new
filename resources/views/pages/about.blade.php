@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'A propos')
+
 @section('css')
 
 
@@ -15,12 +17,32 @@
             <h5 class="text-white">Du Royaume Emerkhammaat</h5>
         </header>
 
-        <div class="py-2">
+        <div class="container py-2">
 
-            <p>
+            @forelse(DB::table('abouts')->get() as $about)
+            <section>
+                <h2 class="text-uppercase">
+                    {{ $about->titre }}
+                </h2>
 
-            
-            </p>
+                <div class="py-5">
+                    <p>
+                        {!! $about->content !!}
+                    </p>
+                </div>
+            </section>
+            @empty
+
+            <div class="py-5 " align="center">
+
+                <div class="alert alert-danger b h4">
+                    Mise à jour en cours
+                </div>
+            </div>
+
+            @endforelse
+
+
 
         </div>
     </div>

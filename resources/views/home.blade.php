@@ -2,7 +2,6 @@
 
 @section('css')
 
-
 @endsection
 
 @section('content')
@@ -41,45 +40,30 @@
             </div>
         </div>
         <div class="blog-grids row mt-5">
+
+            @forelse(DB::table('homes')->get() as $home)
             <div class="col-lg-4 col-md-6 col-sm-12 blog-grid" id="zoomIn">
-                <a href="#blog-single.html">
-                    <iframe class="img-fluid" width="853" height="480" src="https://www.youtube.com/embed/ZItjdvdKgbY?list=TLPQMjMwODIwMjGFbnYpsmi6OQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    {{-- <figure><img src="assets/images/blog.jpg" class="img-fluid" alt=""></figure> --}}
+                <a href="{{ $home->lien }}">
+                    <iframe class="img-fluid" width="853" height="480" src="{{ $home->lien }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
                 </a>
                 <div class="blog-info">
-                    <h3><a href="#blog-single.html">MESSAGE AU DUGNITAIRE D’AFRIQUE</a> </h3>
-                    <ul hidden>
-                        <li><a href="#author"><span class="fa fa-user-o mr-2"></span>Johnson smith</a></li>
-                        <li><span class="fa fa-calendar mr-2"></span>Jan 16, 2020</li>
-                    </ul>
+                    <h3><a href="{{ $home->lien }}">{{ $home->titre }}</a> </h3>
+
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 mt-md-0 mt-4 blog-grid" id="zoomIn">
-                <a href="#blog-single.html">
-                    <iframe class="img-fluid" width="853" height="480" src="https://www.youtube.com/embed/8pJHZZ7K3rM?list=TLPQMjMwODIwMjGFbnYpsmi6OQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    {{-- <figure><img src="assets/images/blog1.jpg" class="img-fluid" alt=""></figure> --}}
-                </a>
-                <div class="blog-info">
-                    <h3><a href="#blog-single.html">Présentation du Royaume Emerkhammaat (Version française)</a> </h3>
-                    <ul hidden>
-                        <li><a href="#author"><span class="fa fa-user-o mr-2"></span>Alexander</a></li>
-                        <li><span class="fa fa-calendar mr-2"></span>Jan 19, 2020</li>
-                    </ul>
+            @empty
+
+            <div class="py-5 " align="center">
+
+                <div class="alert alert-danger b h4">
+                    Mise à jour en cours
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 mt-lg-0 mt-4 blog-grid" id="zoomIn">
-                <a href="#blog-single.html">
-                    <iframe width="853" class="img-fluid" height="480" src="https://www.youtube.com/embed/he0C131R7vU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    {{-- <figure><img src="assets/images/blog2.jpg" class="img-fluid" alt=""></figure> --}}
-                </a>
-                <div class="blog-info">
-                    <h3><a href="#blog-single.html">Presentation of the Emerkhammaat Kingdom (English Version)</a> </h3>
-                    <ul hidden>
-                        <li><a href="#author"><span class="fa fa-user-o mr-2"></span>Elizabeth ker</a></li>
-                        <li><span class="fa fa-calendar mr-2"></span>Jan 21, 2020</li>
-                    </ul>
-                </div>
-            </div>
+
+            @endforelse
+
         </div>
     </div>
 </section>
@@ -87,81 +71,39 @@
 
 <!-- home page service grids -->
 <section id="services" class="bg-light">
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-lg-8 offset-lg-2 col-md-12 col-sm-12">
-        <h4 class="section-title text-uppercase">Nos differentes <strong>RUBRIQUES</strong></h4>
-        <p class="text-center">Nous apportons la Justice équitable c’est-à-dire les blancs ont mal agit mais, on n’oublie pas le peu de bien qu’ils ont apporté.</p>
-      </div>
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8 offset-lg-2 col-md-12 col-sm-12">
+                <h4 class="section-title text-uppercase">Nos differentes <strong>RUBRIQUES</strong></h4>
+                <p class="text-center">Nous apportons la Justice équitable c’est-à-dire les blancs ont mal agit mais, on n’oublie pas le peu de bien qu’ils ont apporté.</p>
+            </div>
+        </div>
+        <div class="row mt-lg-5">
+
+            @forelse(DB::table('formations')->take(6)->get() as $format)
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="box-wrap">
+                    <div class="icon">
+                        <span class="fa fa-lightbulb-o"></span>
+                    </div>
+                    <h4><a href="/formation/?d={{ $format->slug }}">{{ $format->titre }}</a></h4>
+                    <p class="text-truncate"></p>
+                    <a href="/formation/?d={{ $format->slug }}" class="btn btn-primary btn-style">En savoir plus</a>
+                </div>
+            </div>
+            @empty
+
+            <div class="py-5 " align="center">
+
+                <div class="alert alert-danger b h4">
+                    Mise à jour en cours
+                </div>
+            </div>
+
+            @endforelse
+
+        </div>
     </div>
-    <div class="row mt-lg-5">
-      <div class="col-lg-4 col-md-6 col-sm-12">
-        <div class="box-wrap">
-          <div class="icon">
-            <span class="fa fa-lightbulb-o"></span>
-          </div>
-          <h4><a href="#url">Royaume Messianique Shammah</a></h4>
-          <p>Le Royaume Messianique Shammah est centré sur la réforme de l’espèce et de la race humaine afin de faire connaitre et comprendre à l’être humain le but de son existence sur terre. </p>
-          <a href="/read/more/1" class="btn btn-primary btn-style">En savoir plus</a>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-sm-12">
-        <div class="box-wrap">
-          <div class="icon">
-            <span class="fa fa-lightbulb-o"></span>
-          </div>
-          <h4><a href="#url">Qouronne d’Afrikhammaât Awhanga</a></h4>
-          <p>Lorem ipsum dolor sit amet sed consectetur adipisicing elit.
-            doloret quas saepe autem, dolor set.</p>
-            <a href="/read/more/2" class="btn btn-primary btn-style">En savoir plus</a>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-sm-12">
-        <div class="box-wrap">
-          <div class="icon">
-            <span class="fa fa-lightbulb-o"></span>
-          </div>
-          <h4><a href="#url">Emirat Khamaât</a></h4>
-          <p>Lorem ipsum dolor sit amet sed consectetur adipisicing elit.
-            doloret quas saepe autem, dolor set.</p>
-            <a href="/read/more/3" class="btn btn-primary btn-style">En savoir plus</a>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-sm-12">
-        <div class="box-wrap">
-          <div class="icon">
-            <span class="fa fa-lightbulb-o"></span>
-          </div>
-          <h4><a href="#url">Monarchie Lingakomon</a></h4>
-          <p>Lorem ipsum dolor sit amet sed consectetur adipisicing elit.
-            doloret quas saepe autem, dolor set.</p>
-            <a href="/read/more/4" class="btn btn-primary btn-style">En savoir plus</a>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-sm-12">
-        <div class="box-wrap">
-          <div class="icon">
-            <span class="fa fa-lightbulb-o"></span>
-          </div>
-          <h4><a href="#url">Maison YESHWMBANGU</a></h4>
-          <p>Lorem ipsum dolor sit amet sed consectetur adipisicing elit.
-            doloret quas saepe autem, dolor set.</p>
-            <a href="/read/more/5" class="btn btn-primary btn-style">En savoir plus</a>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-sm-12" >
-        <div class="box-wrap">
-          <div class="icon">
-            <span class="fa fa-lightbulb-o"></span>
-          </div>
-          <h4><a href="#url">Autre projets</a></h4>
-          <p>Lorem ipsum dolor sit amet sed consectetur adipisicing elit.
-            doloret quas saepe autem, dolor set.</p>
-            <a href="/read/more/6" class="btn btn-primary btn-style">En savoir plus</a>
-        </div>
-      </div>
-    </div>
-  </div>
 </section>
 <!-- //home page service grids -->
 
@@ -191,8 +133,7 @@
                                         <span class="fa fa-star"></span>
                                         <span class="fa fa-star"></span>
                                     </div>
-                                    <p>Lorem ipsum dolor, sit amet consect adipis icing elit. Ab commodi iure minus
-                                        placeat quia, animi. Eveniet, iure et. ipsum dolor sed ut init et.</p>
+                                    <p class="text-danger">Mise à jour en cours...</p>
                                     <div class="customers-bottom_sur">
                                         <div class="custo_grid">
                                             <h5>Tanguy De</h5>
@@ -329,7 +270,7 @@
             <div class="col-lg-5 align-items-center">
                 <h4 class="left-title">
                     Nous avons opté pour l’agro-alimentaire </h4>
-                <p class="white">Dans l’avenir du secteur minier car, 
+                <p class="white">Dans l’avenir du secteur minier car,
                     nous possédons des terres d’exploitation minière. Donc, nous ferons appel à des investisseurs industriels.</p>
             </div>
             <div class="col-lg-7" align="center">
@@ -349,16 +290,16 @@
         <div class="d-lg-flex align-items-center justify-content-between">
             <div class="col-lg-6 info mb-lg-0 mb-sm-5 mb-4 align-items-center">
                 <h3 class="title">A propos du Royaume EMERKHAMMAAT</h3>
-                
+
                 <p class="mt-md-4 mt-3 mb-0">Il nous a été révélé après de longues années d’expérience missionnaire :
-                    <p>
-                        <ul>
-                            <li>-	De l’Apôtre AWHANGA, 30 ans,</li>
-                            <li>-	De la sentinelle BOKOSEKO, 25 ans.</li>
-                        </ul>
-                    </p>
-                    Après notre mariage, voici notre premier (1er) enfant, <strong>EMERKHAMMAAT</strong> qui est né du Royaume Messianique Shammah. Car, nous croyons à notre Enseignant et Guide YESHWAH HA MASHYAH. En lui, nous sommes des Messies pour la réunification de la race humaine.
-                    Etant donné que, c’est une nouvelle civilisation, pour la dispenser, nous aurons comme activités : Des Conférences en vue de vulgariser d’abord le message.
+                <p>
+                <ul>
+                    <li>- De l’Apôtre AWHANGA, 30 ans,</li>
+                    <li>- De la sentinelle BOKOSEKO, 25 ans.</li>
+                </ul>
+                </p>
+                Après notre mariage, voici notre premier (1er) enfant, <strong>EMERKHAMMAAT</strong> qui est né du Royaume Messianique Shammah. Car, nous croyons à notre Enseignant et Guide YESHWAH HA MASHYAH. En lui, nous sommes des Messies pour la réunification de la race humaine.
+                Etant donné que, c’est une nouvelle civilisation, pour la dispenser, nous aurons comme activités : Des Conférences en vue de vulgariser d’abord le message.
                 </p>
                 <a class="btn btn-primary my-3" href="/about"> En savoir plus</a>
             </div>
@@ -375,6 +316,5 @@
 @endsection
 
 @section('js')
-    
-@endsection
 
+@endsection

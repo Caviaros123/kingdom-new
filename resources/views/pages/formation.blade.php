@@ -9,48 +9,49 @@
         </header>
         <div class="container">
             <p>
-            Conquête des terres pour l’instauration du Royaume à travers l’Agriculture, la Santé, l’Education, dans les territoires enclavés, abandonnés afin de rendre les villageois indépendant, autonome en cherchant à découvrir les potentialités ou richesses de la nature.4-
+                Conquête des terres pour l’instauration du Royaume à travers l’Agriculture, la Santé, l’Education, dans les territoires enclavés, abandonnés afin de rendre les villageois indépendant, autonome en cherchant à découvrir les potentialités ou richesses de la nature.
             </p>
         </div>
         <div class="row p-5">
-            <div class="col-3">
+            <div class="col-3 card">
+                <div class="py-5">
+                    <h4>Les portails spirituelles</h4>
+                </div>
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Royaume Messianique Shammah
-                        (Héritage biblique)</a>
-                        <hr>
-                    <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Qouronne d’Afrikhammaât Awhanga</a>
+                    @forelse(DB::table('formations')->get() as $format)
+                    <a class="nav-link {{ $format->id == 1 ? 'active' : '' }}" id="v-pills-{{ $format->slug }}-tab" data-toggle="pill" href="#v-pills-{{ $format->slug }}" role="tab" aria-controls="v-pills-{{ $format->slug }}" aria-selected="true">{{ $format->titre }}</a>
                     <hr>
-                    <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Emirat Khamaât</a>
-                    <hr>
-                    <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Monarchie Lingakomon
-                        (Notre Dame de la RDC)</a>
+                    @empty
+
+                    <div class="py-5 " align="center">
+
+                        <div class="alert alert-danger b h4">
+                            Mise à jour en cours
+                        </div>
+                    </div>
+
+                    @endforelse
                 </div>
             </div>
-            <div class="col-9">
+            <div class="col-9 ">
+                <!-- <label for="v-pills-tabContent">FORMATION</label> -->
                 <div class="tab-content" id="v-pills-tabContent">
-                    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">...</div>
-                    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">...</div>
-                    <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-                        <p> L’héritage que Khamat Antique nous a légué par la civilisation Egyptienne, Ethiopienne, Soudanaise…
-                        <ul>
-                            <li>1. LA FAMILLE AFRIKHAMAÂT</li>
 
-                            <li>2. LA FAMILLE ASIKHAMAÂT</li>
-
-                            <li>3.LA FAMILLE EUROKHAMAÂT</li>
-
-                            <li>4. LA FAMILLE OCEAKHAMAÂT</li>
-
-                            <li>5.LA FAMILLE AMERKHAMAAÂT</li>
-                        </ul>
-                        </p>
+                    @forelse(DB::table('formations')->get() as $format)
+                    <div class="tab-pane fade  {{ $format->id == 1 ? ' show active' : '' }}" id="v-pills-{{ $format->slug }}" role="tabpanel" aria-labelledby="v-pills-{{ $format->slug }}-tab">
+                        <p class="text-danger">{!! $format->content !!}</p>
                     </div>
-                    <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                    @empty
 
-                        <p>
+                    <div class="py-5 " align="center">
 
-                        </p>
+                        <div class="alert alert-danger b h4">
+                            Mise à jour en cours
+                        </div>
                     </div>
+
+                    @endforelse
+
                 </div>
             </div>
         </div>

@@ -60,7 +60,7 @@
           <div class="row" data-aos="fade-up">
             <div class="col-xl-8 stretch-card grid-margin">
 
-              @forelse(DB::table('posts')->where('status', 'PUBLISHED')->get() as $post)
+              @forelse(DB::table('posts')->where('status', 'PUBLISHED')->latest()->get() as $post)
               <div class="position-relative">
                 <img src="{{Voyager::image($post->image)}}" alt="banner" class="img-fluid" />
                 <div class="banner-content">
@@ -91,7 +91,7 @@
                 <div class="card-body">
                   <h2>Dernières Nouvelles</h2>
 
-                  @forelse(DB::table('posts')->where('status', 'PUBLISHED')->take(3)->get() as $post)
+                  @forelse(DB::table('posts')->where('status', 'PUBLISHED')->take(3)->latest()->get() as $post)
                   <div class="d-flex border-bottom-blue pt-3 pb-4 align-items-center justify-content-between">
                     <div class="pr-3">
                       <h5>{{ $post->title }}</h5>
